@@ -1,0 +1,560 @@
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f7f6;
+	color: #333;
+	margin: 0;
+	padding: 0; 
+	font-size: 14px;
+}
+
+.main-content {
+	
+	max-width: 98%; 
+	min-width: 1200px; 
+	margin: 20px auto; 
+	background-color: #ffffff;
+	border-radius: 10px; 
+	box-shadow: 0 8px 20px rgba(0, 0, 0 , 0.15); 
+	overflow: hidden; 
+}
+
+
+.header-bar {
+	display: block; 
+	padding: 15px 25px 0 25px; 
+	border-bottom: 1px solid #ddd; 
+	background-color: #fcfcfc;
+}
+
+
+.toggle-mode-container {
+    /* Container que hospeda o botão. Alinhado abaixo dos filtros. */
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 10px; 
+  
+}
+#toggle_mode_button {
+	padding: 6px 12px; 
+	border-radius: 4px;
+	border: 1px solid #275176;
+	background-color: #e9f7ff;
+	color: #275176;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.2s;
+    font-size: 0.9em;
+}
+#toggle_mode_button:hover {
+	background-color: #cce5ff;
+}
+
+/* 1. SEÇÃO DO TÍTULO */
+.title-section {
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+.title-container {
+	display: inline-block; 
+}
+
+.title-container h2 {
+	margin: 0;
+	color: #275176;
+	font-size: 2.2em; 
+	font-weight: 1000;
+}
+
+.signature {
+	margin-top: 4px; 
+	font-size: 0.8em;
+	color: #888; 
+	font-style: italic;
+	display: block; 
+}
+
+/* 2. SEÇÃO DE MÉTRICAS */
+.metric-container {
+	display: flex;
+	justify-content: center; 
+	padding: 10px 0;
+	margin-bottom: 5px; 
+}
+
+/* Estilo para o display de duração total */
+#project-duration-display {
+	font-size: 1.1em;
+	font-weight: 500;
+	color: #007bff; 
+	padding: 8px 15px; 
+	border-radius: 8px; 
+	background-color: #e9f7ff;
+	border: 1px solid #cce5ff;
+	height: auto;
+	line-height: normal; 
+	display: inline-block; 
+}
+#project-duration-display strong {
+	font-weight: 700;
+	color: #275176;
+	margin-left: 5px;
+}
+
+/* 3. SEÇÃO DE FILTROS (Compactação) */
+.filter-container {
+	display: flex;
+	justify-content: center; 
+	align-items: center; 
+	gap: 10px; /* Reduzido para compactar mais */
+	padding-bottom: 15px; 
+	flex-wrap: wrap; 
+	white-space: normal; 
+}
+
+/* NOVO BLOCO: Agrupa Label + Select */
+.filter-item {
+	display: flex;
+	align-items: center; 
+	gap: 6px;
+	flex-shrink: 0; 
+}
+
+.filter-container label {
+	font-size: 0.9em; 
+	font-weight: 500;
+	color: #555;
+	line-height: 1.5; 
+}
+
+.filter-container select {
+	padding: 6px 10px;
+	border-radius: 4px;
+	border: 1px solid #bbb;
+	font-size: 0.9em; 
+	transition: border-color 0.2s;
+	margin: 0; 
+}
+.filter-container select:focus {
+	border-color: #275176;
+	outline: none;
+}
+
+
+/* --- CONTAINER PRINCIPAL DO GANTT (3 COLUNAS) --- */
+#gantt-container {
+	display: flex;
+	width: 100%;
+	height: 69vh; 
+	overflow: hidden; 
+}
+
+/* --- LADO ESQUERDO 1: Lista de Tarefas --- */
+#task-list-container {
+	width: 350px;
+	min-width: 350px; 
+	max-width: 350px; 
+	border-right: 1px solid #ddd; 
+	overflow-y: auto; 
+	overflow-x: hidden;
+}
+
+/* --- LADO DO MEIO 2: Tabela de Dados Chave --- */
+#data-table-container {
+	width: 250px; 
+	min-width: 250px;
+	max-width: 250px;
+	border-right: 1px solid #ddd;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+/* --- LADO DIREITO 3: Linha do Tempo --- */
+#timeline-container {
+	flex-grow: 1;
+	overflow-x: auto; 
+	overflow-y: auto;
+}
+
+
+/* --- CABEÇALHOS GERAIS (Tarefa e Dados) --- */
+.task-list-header, .data-table-header {
+	height: 50px; 
+	line-height: 50px;
+	font-weight: bold;
+	background-color: #f9f9f9; 
+	border-bottom: 2px solid #eee;
+	
+	position: sticky; 
+	top: 0; 
+	z-index: 20; 
+	color: #275176;
+	box-sizing: border-box; 
+	
+	display: flex; 
+	align-items: center;
+	justify-content: flex-start; 
+}
+
+.task-list-header {
+	padding: 0 15px; 
+	border-top-left-radius: 10px; 
+}
+
+/* CRÍTICO: O cabeçalho da tabela de dados agora é flex para distribuir os títulos */
+.data-table-header {
+	padding: 0; 
+	border-top-right-radius: 0; 
+	display: flex; 
+	width: 100%;
+}
+
+/* --- CÉLULAS DE DADOS (Cabeçalho da Tabela) --- */
+.data-table-header .data-cell {
+	line-height: normal; 
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.9em;
+	height: 100%;
+	border-right: 1px solid #ddd; 
+	box-sizing: border-box; 
+}
+.data-table-header .data-cell:last-child {
+	border-right: none;
+}
+
+
+/* DEFINIÇÕES DE LARGURA DO CABEÇALHO */
+.header-cell-short {
+	width: 35%; 
+	flex-shrink: 0;
+}
+.header-cell-duration {
+	width: 30%; 
+	flex-shrink: 0;
+}
+
+/* --- CORPOS DE DADOS --- */
+#task-list-body, #timeline-body, #data-table-body {
+	position: relative; 
+	padding-top: 0; 
+}
+
+/* --- LINHAS DE DADOS (Corpo da Tabela) --- */
+.data-row {
+	position: absolute;
+	width: 100%;
+	height: 50px; 
+	background-color: #fff;
+	box-sizing: border-box;
+	display: flex; 
+	box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.03); 
+}
+.data-row:hover, .task-row:hover {
+	background-color: #eef2f5; 
+}
+
+/* CÉLULAS DO CORPO DA TABELA */
+.data-row .data-cell {
+	line-height: 50px;
+	font-weight: normal;
+	font-size: 0.85em;
+	padding: 0 5px;
+	text-align: center;
+	border-right: 1px solid #eee; 
+	border-bottom: none; 
+	
+	box-sizing: border-box;
+}
+
+
+.data-row .data-cell:nth-child(1), 
+.data-row .data-cell:nth-child(2) {
+	width: 35%;
+	flex-shrink: 0;
+}
+.data-row .data-cell:nth-child(3) {
+	width: 30%;
+	flex-shrink: 0;
+}
+
+.data-row .data-cell:last-child {
+	border-right: none;
+}
+
+
+.gantt-separator-line {
+	position: absolute;
+	height: 1px; 
+	background-color: #e0e0e0; 
+	width: 100%;
+	left: 0;
+	z-index: 5; 
+}
+
+/* --- LINHA DA TAREFA (Lado Esquerdo) --- */
+.task-row {
+	display: block;
+	line-height: 50px;
+	padding: 0 15px; 
+	height: 50px; 
+	
+	background-color: #fff;
+	position: absolute; 
+	width: 100%; 
+	box-sizing: border-box; 
+	font-size: 0.85em; 
+	white-space: nowrap; 
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.03); 
+	transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-row:hover {
+	background-color: #eef2f5; 
+}
+
+/* --- CABEÇALHO DA LINHA DO TEMPO (Meses e Dias) --- */
+#timeline-header {
+	background-color: #f9f9f9;
+	font-weight: bold;
+	padding: 0; 
+	border-bottom: 2px solid #eee;
+	position: sticky;
+	top: 0;
+	z-index: 20; 
+	display: flex; 
+	box-sizing: border-box;
+	color: #275176;
+	border-top-right-radius: 10px; 
+	height: 50px; 
+}
+
+.timeline-month-header span {
+	text-align: center;
+	padding: 4px 0;
+	font-size: 0.9em;
+	background-color: #e6e6e6; 
+	border-bottom: 1px solid #ccc; 
+	position: sticky;
+	top: 0; 
+}
+
+.timeline-day-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.8em;
+	color: #555;
+	height: 25px; 
+	border-right: 1px dotted #d0d0d0;
+	box-sizing: border-box;
+}
+.timeline-day-header:last-child {
+	border-right: none;
+}
+
+/* --- CORREÇÃO DO CALENDÁRIO --- */
+.timeline-days-container {
+	display: flex;
+	flex-direction: row; 
+}
+.timeline-month-header {
+	display: flex;
+	flex-direction: column; 
+	border-right: 1px solid #ddd;
+}
+
+
+
+.today-line {
+	position: absolute;
+	top: 0;
+	border-left: 2px dashed #dc3545; 
+	height: 100%; 
+	z-index: 10; 
+}
+
+
+.gantt-bar {
+	position: absolute;
+	
+	height: 22px; 
+	border-radius: 4px; 
+	
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+	box-sizing: border-box;
+	
+	overflow: hidden;
+	white-space: nowrap;
+	
+	color: #fff;
+	font-size: 0.8em;
+	font-weight: bold;
+	
+	box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+	transition: all 0.2s ease;
+	cursor: pointer;
+	z-index: 15; 
+	
+	--real-start-percent: 0%; 
+}
+
+.gantt-bar:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+	opacity: 0.95;
+}
+
+/* CRÍTICO: Estilo do Gradiente */
+.gantt-bar-gradient {
+	background: 
+		linear-gradient(to right, 
+			/* 1. Cor Escura (Executado) */
+			var(--status-color) 0%, 
+			var(--status-color) var(--real-start-percent), 
+			/* 2. Cor Clara (Planejado/Solicitado) */
+			var(--planned-color) var(--real-start-percent),
+			var(--planned-color) 100%
+		) !important;
+}
+
+/* --- LABEL e RESPONSÁVEL --- */
+.gantt-bar-label {
+	font-size: 0.9em;
+	line-height: 1;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 8px;
+	color: inherit; 
+}
+
+.gantt-bar-label strong {
+	font-weight: 700;
+	margin-right: 6px;
+}
+
+
+
+.status-em-andamento { --status-color: #92d4e2; --planned-color: #0dcaf0; }
+.status-em-andamento span { color: #113; text-shadow: none; }
+
+.status-atrasado { --status-color: #b02a37; --planned-color: #e599a0; }
+
+.status-finalizado { --status-color: #208338; --planned-color: #9bd6a9; }
+
+.status-pendente { --status-color: #d39e00; --planned-color: #ffe699; }
+.status-pendente span { color: #333; text-shadow: none; }
+
+.status-cancelado { --status-color: #5a6268; --planned-color: #b3b7bb; }
+.status-cancelado span { color: #333; text-shadow: none; }
+
+.status-default { --status-color: #aaa; --planned-color: #e0e0e0; }
+.status-default span { color: #333; text-shadow: none; }
+
+
+.gantt-bar:not(.gantt-bar-gradient) {
+	background: var(--status-color);
+}
+
+
+.status-em-andamento .legend-color { background: #0dcaf0; }
+.status-atrasado .legend-color { background: #dc3545; }
+.status-finalizado .legend-color { background: #28a745; }
+.status-pendente .legend-color { background: #ffc107; }
+.status-cancelado .legend-color { background: #6c757d; }
+.status-default .legend-color { background: #ccc; }
+
+
+/* --- LEGENDAS E MODAIS --- */
+.footer-legend {
+	padding: 12px 18px;
+	margin: 12px;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	flex-wrap: wrap;
+	background: linear-gradient(180deg, #fafbfb, #f5f7f7);
+	border: 1px solid #e6e6e6;
+}
+
+.legend-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 0.95em;
+	color: #333;
+	cursor: pointer;
+	padding: 2px 4px; 
+	transition: all 0.2s;
+}
+
+.legend-item.active-filter {
+	outline: 2px solid #275176; 
+	outline-offset: 2px;
+	border-radius: 4px;
+	background-color: #eef2f5;
+}
+
+.legend-color {
+	width: 28px;
+	height: 12px;
+	border-radius: 3px;
+	margin-right: 6px;
+}
+
+.legend-label {
+	font-size: 0.95em;
+	color: #444;
+}
+
+
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #ccc;
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #a8a8a8;
+}
+
+/* Modal simples para edição de datas */
+.modal-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0,0,0,0.35);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 9999;
+}
+.modal {
+	background: #fff;
+	border-radius: 8px;
+	padding: 14px;
+	width: 360px;
+	box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+	font-family: inherit;
+}
+.modal-header { font-size: 1.05em; margin-bottom: 6px; color:#275176; }
+.modal-body label { display: block; font-size: 0.95em; color:#222; }
+.modal-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:12px; }
+.modal-actions button { padding:6px 10px; border-radius:6px; border:1px solid #ccc; background:#fff; cursor:pointer; }
+.modal-actions button:disabled { opacity:0.6; cursor:not-allowed; }
+
+/* erro dentro do modal */
+.modal-error { font-size:0.9em; color:#a00; }
