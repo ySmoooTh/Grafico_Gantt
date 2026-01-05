@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gráfico de Gantt - Gestão de Projetos</title>
+
+	<link rel="stylesheet" href="Estilo.css">
+</head>
+<body>
+
+<div class="main-content">
+
+	<!-- CABEÇALHO -->
+	<div class="header-bar">
+
+		<div class="title-section">
+			<div class="title-container">
+				<h2>Gráfico de Gantt - Gestão de Projetos</h2>
+			</div>
+		</div>
+
+		<!-- MÉTRICA -->
+		<div class="metric-container">
+			<div id="project-duration-display">
+				<span>Duração Total: <strong id="total-duration-value">--</strong></span>
+			</div>
+		</div>
+
+		<!-- FILTROS -->
+		<div class="filter-container">
+
+			<div class="filter-item">
+				<label for="project_select">Projeto:</label>
+				<select id="project_select">
+					<option value="ALL">Todos</option>
+				</select>
+			</div>
+
+			<div class="filter-item">
+				<label for="zoom_select">Escala:</label>
+				<select id="zoom_select">
+					<option value="week" selected>Semana</option>
+					<option value="day_compact">Dia (Compacto)</option>
+					<option value="day">Dia (Completo)</option>
+					<option value="month">Mês</option>
+				</select>
+			</div>
+
+			<div class="filter-item">
+				<label for="responsible_select">Responsável:</label>
+				<select id="responsible_select">
+					<option value="ALL">Todos</option>
+				</select>
+			</div>
+
+			<div class="filter-item">
+				<label for="classification_select">Classificação:</label>
+				<select id="classification_select">
+					<option value="ALL">Todas</option>
+				</select>
+			</div>
+
+			<div class="filter-item">
+				<label for="sector_select">Setor:</label>
+				<select id="sector_select">
+					<option value="ALL">Todos</option>
+				</select>
+			</div>
+
+		</div>
+
+		<!-- MODO TAREFAS / PROJETOS -->
+		<div class="toggle-mode-container align-right">
+			<button id="toggle_mode_button">Ver Projetos</button>
+		</div>
+
+	</div>
+	<!-- FIM DO CABEÇALHO -->
+
+	<!-- CONTAINER PRINCIPAL -->
+	<div id="gantt-container">
+
+		<!-- LISTA -->
+		<div id="task-list-container">
+			<div class="task-list-header">
+				<span>Tarefa / Responsável</span>
+			</div>
+			<div id="task-list-body"></div>
+		</div>
+
+		<!-- TABELA DE DADOS -->
+		<div id="data-table-container">
+			<div class="data-table-header">
+				<div class="data-cell header-cell-short">Início</div>
+				<div class="data-cell header-cell-short">Fim</div>
+				<div class="data-cell header-cell-duration">Duração</div>
+			</div>
+			<div id="data-table-body"></div>
+		</div>
+
+		<!-- LINHA DO TEMPO -->
+		<div id="timeline-container">
+			<div id="timeline-header"></div>
+			<div id="timeline-body"></div>
+		</div>
+
+	</div>
+
+	<script src="Script.js"></script>
+
+</div>
+
+</body>
+</html>
